@@ -161,7 +161,7 @@ export default function Competition({ quiz }: { quiz: QuizCard }) {
         </div>
       </div>
       <aside className="glass h-fit p-5">
-        <h3 className="mb-4 flex items-center gap-2 text-xl font-bold"><IconTrophy className="text-accent" /> لوحة الترتيب</h3>
+        <h3 className="mb-4 flex items-center gap-2 text-xl font-bold"><IconTrophy className="h-6 w-6 text-accent" /> لوحة الترتيب</h3>
         <LayoutGroup>
           <ol className="grid gap-2">
             {ranked.map((g, r) => (

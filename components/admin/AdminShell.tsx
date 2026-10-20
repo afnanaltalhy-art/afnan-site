@@ -44,10 +44,10 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
             </div>
           </aside>
           {open && <button className="fixed inset-0 z-40 bg-black/40 lg:hidden" aria-label="إغلاق القائمة" onClick={() => setOpen(false)} />}
-          <main className="min-w-0 flex-1 p-4 sm:p-8">
+          <div className="min-w-0 flex-1 p-4 sm:p-8">
             {!db && <div className="mb-6 rounded-2xl bg-accent/20 p-4 font-bold text-navy ring-1 ring-accent">⚠ قاعدة البيانات غير مهيأة. أضيفي متغير DATABASE_URL (راجعي ملف README) حتى تعمل الإضافة والتعديل.</div>}
             {children}
-          </main>
+          </div>
         </div>
       </div>
     </ToastProvider>

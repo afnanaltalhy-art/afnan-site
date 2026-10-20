@@ -116,7 +116,7 @@ export default async function Home() {
           <div className="glass p-6 leading-9 text-white/80 lg:col-span-2">{s.about}</div>
           <div className="glass grid content-start gap-3 p-6">
             {contacts.length ? contacts.map(({ href, label, Icon }) => (
-              <a key={href} href={href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 rounded-2xl bg-white/5 p-3 font-bold transition hover:bg-white/10"><Icon className="text-accent" /> {label}</a>
+              <a key={href} href={href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 rounded-2xl bg-white/5 p-3 font-bold transition hover:bg-white/10"><Icon className="h-5 w-5 text-accent" /> {label}</a>
             )) : <p className="text-white/60">للتواصل والتعاون استخدمي نموذج الطلب.</p>}
             <Link href="/request" className="btn-brand"><IconSend /> نموذج التواصل</Link>
           </div>

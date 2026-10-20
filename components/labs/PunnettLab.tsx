@@ -6,7 +6,7 @@ import { TRAITS, cross, describeGenotype, genotypes, isCap, ratioText } from "@/
 import { sfx } from "@/lib/sound";
 import { IconReplay } from "@/components/ui/Icons";
 
-const CELL = 112;
+const CELL = 128;
 
 export default function PunnettLab({ defaultTrait = "pod", defaultP1 = "Gg", defaultP2 = "Gg" }: { defaultTrait?: string; defaultP1?: string; defaultP2?: string }) {
   const [traitKey, setTraitKey] = useState(defaultTrait);
@@ -82,7 +82,7 @@ export default function PunnettLab({ defaultTrait = "pod", defaultP1 = "Gg", def
 
       <div className="grid items-start gap-8 lg:grid-cols-2">
         <div className="mx-auto" key={run}>
-          <div className="grid" style={{ gridTemplateColumns: `72px ${CELL}px ${CELL}px`, gridTemplateRows: `72px ${CELL}px ${CELL}px` }}>
+          <div className="grid" style={{ gridTemplateColumns: `56px repeat(2, clamp(96px, 27vw, ${CELL}px))`, gridTemplateRows: `64px repeat(2, clamp(96px, 27vw, ${CELL}px))` }}>
             <div className="grid place-items-center text-xs text-white/50">♂ × ♀</div>
             {[0, 1].map((c) => (
               <div key={c} className="grid place-items-center">
@@ -100,7 +100,7 @@ export default function PunnettLab({ defaultTrait = "pod", defaultP1 = "Gg", def
                   return (
                     <div key={c} className="relative grid place-items-center border-2 border-white/70" style={{ background: stage >= 3 || (showAuto) ? (d ? `${t.domColor}55` : `${t.recColor}66`) : "transparent" }}>
                       {showAuto && (
-                        <div className="ltr flex items-center gap-1 text-4xl font-bold">
+                        <div className="ltr flex items-center gap-1 text-[2rem] font-bold">
                           {[0, 1].map((k) => {
                             const fromTop = k === 0 ? cell.g[0] === cell.top && cell.g[1] === cell.side : !(cell.g[0] === cell.top && cell.g[1] === cell.side);
                             return (
@@ -124,8 +124,8 @@ export default function PunnettLab({ defaultTrait = "pod", defaultP1 = "Gg", def
                           {checked && guess[i] !== cell.g && <span className="ltr text-xl font-bold text-white">{cell.g}</span>}
                         </div>
                       )}
-                      {(stage >= 3 || showAuto) && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: mode === "auto" ? i * 0.55 + 0.9 : 0 }} className="absolute left-1 top-1"><Phen g={cell.g} size={34} /></motion.div>}
-                      {(stage >= 3 || showAuto) && <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: mode === "auto" ? i * 0.55 + 0.9 : 0 }} className="absolute bottom-1 right-1.5 text-xs font-bold text-white/80">25%</motion.span>}
+                      {(stage >= 3 || showAuto) && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: mode === "auto" ? i * 0.55 + 0.9 : 0 }} className="absolute right-1 top-1"><Phen g={cell.g} size={28} /></motion.div>}
+                      {(stage >= 3 || showAuto) && <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: mode === "auto" ? i * 0.55 + 0.9 : 0 }} className="absolute bottom-1 left-1.5 text-xs font-bold text-white/80">25%</motion.span>}
                     </div>
                   );
                 })}

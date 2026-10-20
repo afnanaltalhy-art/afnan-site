@@ -86,13 +86,13 @@ export default function Page({ params }: { params: { id: string } }) {
           <Card title="ملفات الدرس (PowerPoint / PDF)">
             {isNew ? <p className="text-navy/50">احفظي الدرس أولًا ثم أرفقي الملفات.</p> : (
               <>
-                <UploadButton multiple accept=".pdf,.ppt,.pptx,.doc,.docx,image/*,video/*" lessonId={params.id} label="رفع ملفات" onDone={(f) => set("files", [...(l.files ?? []), { ...f, size: 0 }])} />
+                <UploadButton multiple accept=".pdf,.ppt,.pptx,.doc,.docx,image/*,video/*" lessonId={params.id} label="رفع ملفات" onDone={(f) => setL((x) => ({ ...x, files: [...(x.files ?? []), { ...f, size: 0 }] }))} />
                 <ul className="mt-4 grid gap-2">
                   {(l.files ?? []).map((f) => (
                     <li key={f.id} className="flex items-center justify-between gap-2 rounded-2xl bg-navy/[.03] p-3 text-sm">
                       <a href={f.url} target="_blank" rel="noreferrer" className="truncate font-bold hover:text-brand">{f.name}</a>
                       <span className="shrink-0 text-navy/40">{f.kind}{f.size ? ` • ${fmtSize(f.size)}` : ""}</span>
-                      <Confirm label="إزالة" onYes={async () => { try { await api(`/api/admin/files/${f.id}`, "PATCH", { lessonId: null }); set("files", (l.files ?? []).filter((x) => x.id !== f.id)); toast("أُزيل الملف من الدرس (بقي في المكتبة)"); } catch (e) { toast((e as Error).message, "err"); } }} />
+                      <Confirm label="إزالة" onYes={async () => { try { await api(`/api/admin/files/${f.id}`, "PATCH", { lessonId: null }); setL((x) => ({ ...x, files: (x.files ?? []).filter((y) => y.id !== f.id) })); toast("أُزيل الملف من الدرس (بقي في المكتبة)"); } catch (e) { toast((e as Error).message, "err"); } }} />
                     </li>
                   ))}
                 </ul>
