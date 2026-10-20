@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand: 20 145 127;
+  --brand-deep: 11 79 74;
+  --accent: 231 180 22;
+  --accent-warm: 240 138 36;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  @apply bg-ink text-white antialiased;
+  background-image:
+    radial-gradient(1200px 700px at 85% -10%, rgb(var(--brand) / .28), transparent 60%),
+    radial-gradient(900px 600px at -10% 30%, rgb(var(--brand-deep) / .45), transparent 60%);
+  background-attachment: fixed;
+}
+::selection { background: rgb(var(--accent) / .4); }
+
+@layer components {
+  .container-x { @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8; }
+  .glass { @apply rounded-3xl border border-white/10 bg-white/[0.06] backdrop-blur-md shadow-glow; }
+  .card-cream { @apply rounded-3xl bg-cream text-navy shadow-card; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 font-bold transition active:scale-[.97] disabled:cursor-not-allowed disabled:opacity-50; }
+  .btn-primary { @apply btn bg-accent text-navy hover:brightness-110; }
+  .btn-brand { @apply btn bg-brand text-white hover:brightness-110; }
+  .btn-ghost { @apply btn border border-white/20 bg-white/5 text-white hover:bg-white/10; }
+  .btn-dark { @apply btn bg-navy text-white hover:bg-navy/90; }
+  .chip { @apply inline-flex items-center gap-1.5 rounded-full bg-accent-warm px-3.5 py-1 text-sm font-bold text-white; }
+  .h-section { @apply text-3xl font-bold leading-tight sm:text-4xl; }
+  .input { @apply w-full rounded-xl border border-navy/15 bg-white px-3.5 py-2.5 text-navy outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/30; }
+  .label { @apply mb-1.5 block text-sm font-bold text-navy/80; }
+  .ltr { direction: ltr; unicode-bidi: isolate; display: inline-block; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
+
+/* Grid items may shrink below their content width (prevents horizontal page scroll on phones). */
+@layer base { .grid > * { min-width: 0; } }

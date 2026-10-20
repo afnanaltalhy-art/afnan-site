@@ -1,0 +1,45 @@
+{
+  "name": "afnan-site",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "prisma generate && next build",
+    "start": "next start",
+    "lint": "next lint",
+    "postinstall": "prisma generate",
+    "db:push": "prisma db push",
+    "db:local": "node scripts/dev-db.mjs",
+    "typecheck": "tsc --noEmit",
+    "vercel-build": "prisma generate && (prisma db push --skip-generate || echo 'تخطّي مزامنة قاعدة البيانات') && next build"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.21.1",
+    "@react-three/drei": "^9.114.0",
+    "@react-three/fiber": "^8.17.10",
+    "@vercel/blob": "^0.27.3",
+    "canvas-confetti": "^1.9.3",
+    "framer-motion": "^11.11.9",
+    "jose": "^5.9.6",
+    "next": "14.2.15",
+    "react": "^18",
+    "react-dom": "^18",
+    "three": "^0.169.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/canvas-confetti": "^1.6.4",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/three": "^0.169.0",
+    "embedded-postgres": "^17.2.0-beta.15",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.15",
+    "postcss": "^8",
+    "prisma": "^5.21.1",
+    "tailwindcss": "^3.4.1",
+    "tsx": "^4.19.1",
+    "typescript": "^5"
+  }
+}

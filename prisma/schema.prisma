@@ -1,0 +1,76 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+}
+
+model Lesson {
+  id          String      @id @default(cuid())
+  slug        String      @unique
+  title       String
+  subtitle    String?
+  subject     String?
+  grade       String?
+  description String?
+  coverUrl    String?
+  interactive Boolean     @default(false)
+  published   Boolean     @default(true)
+  order       Int         @default(0)
+  sections    Json        @default("[]")
+  files       MediaFile[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model MediaFile {
+  id        String   @id @default(cuid())
+  name      String
+  url       String
+  mime      String
+  size      Int
+  kind      String
+  lessonId  String?
+  lesson    Lesson?  @relation(fields: [lessonId], references: [id], onDelete: SetNull)
+  createdAt DateTime @default(now())
+}
+
+model Quiz {
+  id              String   @id @default(cuid())
+  title           String
+  description     String?
+  lessonSlug      String?
+  secondsPerQuestion Int   @default(30)
+  questions       Json     @default("[]")
+  published       Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model PortfolioItem {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  category    String?
+  imageUrl    String?
+  link        String?
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+model ClientRequest {
+  id        String   @id @default(cuid())
+  name      String
+  contact   String
+  type      String
+  details   String
+  status    String   @default("new")
+  createdAt DateTime @default(now())
+}
+
+model Setting {
+  key   String @id
+  value Json
+}
